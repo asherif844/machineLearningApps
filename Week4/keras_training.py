@@ -90,11 +90,11 @@ validation_generator = test_datagen.flow_from_directory(
 
 # Model has already been run and saved, no need to run again, but if you need to do so, just uncomment the code below:
 
-# model.fit_generator(
-#         train_generator,
-#         steps_per_epoch=2000 // batch_size,
-#         epochs=50,
-#         validation_data=validation_generator,
-#         validation_steps=800 // batch_size)
-# model.save_weights('mlappsPythonJS/Week4/chest_x_ray/exported_models/first_try.h5')  # always save your weights after training or during training
+model.fit_generator(
+        train_generator,
+        steps_per_epoch=2000 // batch_size,
+        epochs=50,
+        validation_data=validation_generator,
+        validation_steps=800 // batch_size)
+model.save_weights('mlappsPythonJS/Week4/chest_x_ray/exported_models/first_try.h5')  # always save your weights after training or during training
 
