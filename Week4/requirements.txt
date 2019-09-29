@@ -9,7 +9,7 @@ tqdm==4.28.1
 # re
 keras==2.2.4
 Keras-preprocessing==v1.0.5
-tensorflow==1.12
+tensorflow==1.12.2
 Pillow==5.1.0
 opencv-python==3.4.4.19
 matplotlib==2.2.2
