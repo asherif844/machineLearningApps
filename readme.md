@@ -1,0 +1,1 @@
+This working folder will be for machine learning applications only built with keras, flask, and node.js.
