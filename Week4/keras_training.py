@@ -14,22 +14,6 @@ datagen = ImageDataGenerator(
     horizontal_flip=True,
     fill_mode='nearest')
 
-# this is a PIL image
-img = load_img(
-    'mlappsPythonJS/Week4/chest_x_ray/data/train/PNEUMONIA/person1_bacteria_1.jpeg')
-x = img_to_array(img)  # this is a Numpy array with shape (3, 150, 150)
-# this is a Numpy array with shape (1, 3, 150, 150)
-x = x.reshape((1,) + x.shape)
-
-# the .flow() command below generates batches of randomly transformed images
-# and saves the results to the `preview/` directory
-i = 0
-for batch in datagen.flow(x, batch_size=1,
-                          save_to_dir='mlappsPythonJS/Week4/chest_x_ray/modification', save_prefix='bacteria', save_format='jpeg'):
-    i += 1
-    if i > 20:
-        break  # otherwise the generator would loop indefinitely
-
 
 model = Sequential()
 model.add(Conv2D(32, (3, 3), input_shape=(150, 150, 3)))
@@ -74,14 +58,14 @@ test_datagen = ImageDataGenerator(rescale=1./255)
 # subfolers of 'data/train', and indefinitely generate
 # batches of augmented image data
 train_generator = train_datagen.flow_from_directory(
-    'mlappsPythonJS/Week4/chest_x_ray/data/train',  # this is the target directory
+    'Week4/chest_x_ray/data/train',  # this is the target directory
     target_size=(150, 150),  # all images will be resized to 150x150
     batch_size=batch_size,
     class_mode='binary')  # since we use binary_crossentropy loss, we need binary labels
 
 # this is a similar generator, for validation data
 validation_generator = test_datagen.flow_from_directory(
-    'mlappsPythonJS/Week4/chest_x_ray/data/validation',
+    'Week4/chest_x_ray/data/validation',
     target_size=(150, 150),
     batch_size=batch_size,
     class_mode='binary')
@@ -92,9 +76,11 @@ validation_generator = test_datagen.flow_from_directory(
 
 model.fit_generator(
         train_generator,
-        steps_per_epoch=2000 // batch_size,
-        epochs=50,
+        steps_per_epoch=500 // batch_size,
+        epochs=5,
         validation_data=validation_generator,
-        validation_steps=800 // batch_size)
-model.save_weights('mlappsPythonJS/Week4/chest_x_ray/exported_models/first_try.h5')  # always save your weights after training or during training
+        validation_steps=80 // batch_size)
+model.save_weights('Week4/chest_x_ray/exported_models/pneumonia_model_weights.h5')  # always save your weights after training or during training
+model.save_weights('Week4/chest_x_ray/exported_models/pneumonia_model.h5')  # always save your weights after training or during training
 
+model.summary()

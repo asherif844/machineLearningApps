@@ -1,20 +1,21 @@
-# try testing with this
-# https://towardsdatascience.com/basics-of-image-classification-with-keras-43779a299c8b
-
 from keras.models import load_model
-import cv2
+from keras.preprocessing import image
 import numpy as np
 
-model = load_model('mlappsPythonJS/Week4/chest_x_ray/exported_models/first_try.h5')
+# dimensions of our images
+img_width, img_height = 320, 240
 
+# load the model we saved
+model = load_model('Week4/chest_x_ray/exported_models/pneumonia_model.h5')
 model.compile(loss='binary_crossentropy',
               optimizer='rmsprop',
               metrics=['accuracy'])
 
-# img = cv2.imread('mlappsPythonJS/Week4/chest_x_ray/data/validation/NORMAL/IM-0001-0001.jpeg')
-# img = cv2.resize(img,(320,240))
-# img = np.reshape(img,[320,240,3])
+# predicting images
+img = image.load_img('Week4/chest_x_ray/data/train/NORMAL/IM-0115-0001.jpeg', target_size=(img_width, img_height))
+x = image.img_to_array(img)
+x = np.expand_dims(x, axis=0)
 
-# classes = model.predict_classes(img)
-
-# print(classes)
+images = np.vstack([x])
+classes = model.predict_classes(images, batch_size=10)
+print(classes)
