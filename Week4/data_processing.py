@@ -27,4 +27,32 @@ def create_training_data():
                 pass
 
 create_training_data()
+print(bad_file)
+
+print(training_data[3000][1])
+import random
+
+random.shuffle(training_data)
+
+for i in training_data[:10]:
+    print(i[1])
+
+X = []
+y = []
+
+for features, labels in training_data:
+    X.append(features)
+    y.append(labels)
+
+print(X[:1])
+
+X = np.array(X).reshape(-1, IMG_SIZE,IMG_SIZE, 1)
+
+
+import pickle 
+with open ("Week4/chest_x_ray/exported_models/X.pickle", "wb") as file_x:
+    pickle.dump(X, file_x)
+with open ("Week4/chest_x_ray/exported_models/y.pickle", "wb") as file_y:
+    pickle.dump(y, file_y)
+
 
