@@ -3,7 +3,7 @@ import pprint
 from collections import Counter, defaultdict
 
 import cv2
-import tensorflow as tf
+# import tensorflow as tf
 from keras import models
 
 CATEGORIES = ['NORMAL', 'PNEUMONIA']
