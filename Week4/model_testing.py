@@ -21,31 +21,8 @@ model = models.load_model(
 
 # prediction = model.predict([processing('Week4/chest_x_ray/data/validation/PNEUMONIA/person1_virus_6.jpeg')])
 
-path = 'Week4/chest_x_ray/data/validation/NORMAL/'
-# for i in os.listdir(path)[:100]:
-    # print(model.predict([processing(i)]))
-    # print(i)
-    # prediction_score = model.predict(
-    #     [processing(path+i)])
-    # print(CATEGORIES[int(prediction_score[0][0])])
-    # print('--------')
+# path = 'Week4/chest_x_ray/data/validation/NORMAL/'
 
-
-# normal_count = Counter()
-# pneumonia_count = Counter()
-
-# for i in os.listdir(path):
-#         prediction_score = model.predict(
-#         [processing(path+i)])
-#         a = int(prediction_score[0][0])
-#         print(a)
-        # if a == 0:
-        #     normal_count+=1
-        # else:
-        #     pneumonia_count+=1
-
-# print(normal_count)
-# print(pneumonia_count)
 confusion_matrix = []
 
 validation_path = 'Week4/chest_x_ray/data/validation/'
