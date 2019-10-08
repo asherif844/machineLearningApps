@@ -12,6 +12,10 @@ print(keras.__version__)
 
 x = pickle.load(open('Week4/chest_x_ray/exported_models/X.pickle', "rb"))
 y = pickle.load(open('Week4/chest_x_ray/exported_models/y.pickle', "rb"))
+x_test = pickle.load(open('Week4/chest_x_ray/exported_models/X_test.pickle', "rb"))
+y_test = pickle.load(open('Week4/chest_x_ray/exported_models/y_test.pickle', "rb"))
+
+
 
 print(x.shape)
 # print(y.shape)
@@ -53,10 +57,11 @@ model_weights = f'pneumonia_convnn_wts_{int(time.time())}.h5'
 model.save('Week4/chest_x_ray/exported_models/'+model_name)
 model.save_weights('Week4/chest_x_ray/exported_models/'+model_weights)
 
-model.summary()
-model_loaded = model.load_weights('/Users/theahmedsherif/Dropbox/Python/conda_environments/machineLearningApps/Week4/chest_x_ray/exported_models/pneumonia_convnn_1570124819.h5')
-
-model_loaded
+# model.summary()
+# model_loaded = model.load_weights('/Users/theahmedsherif/Dropbox/Python/conda_environments/machineLearningApps/Week4/chest_x_ray/exported_models/pneumonia_convnn_1570124819.h5')
+# model_loaded
 
 # test this with the validation dataset by creating x_test and y_test  for scoring purposes
+x_test = x_test / 255.0
 score = model.evaluate(x_test, y_test, batch_size=16)
+print(score)

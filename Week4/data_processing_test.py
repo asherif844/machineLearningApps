@@ -1,15 +1,58 @@
 import numpy as np
-import keras
-from keras.models import Sequential
-from keras.layers import Dense, Dropout, Flatten
-from keras.layers import Conv2D, MaxPooling2D
-from keras.optimizers import SGD
+import matplotlib.pyplot as plt
+import os
+import cv2
 
-# Generate dummy data
-x_train = np.random.random((100, 100, 100, 3))
-y_train = keras.utils.to_categorical(np.random.randint(10, size=(100, 1)), num_classes=10)
-x_test = np.random.random((20, 100, 100, 3))
-y_test = keras.utils.to_categorical(np.random.randint(10, size=(20, 1)), num_classes=10)
+data_directory = "Week4/chest_x_ray/data/validation"
 
-print(x_train.shape)
-print(y_train.shape)
+categories = ["NORMAL", "PNEUMONIA"]
+
+training_data = []
+bad_file = []
+
+IMG_SIZE = 500
+
+def create_training_data():
+    for category in categories:
+        path = os.path.join(data_directory, category)
+        class_num = categories.index(category)
+        for img in os.listdir(path):
+            try:
+                file_ = os.path.join(path, img)
+                img_array = cv2.imread(file_, cv2.IMREAD_GRAYSCALE)
+                new_array = cv2.resize(img_array, (IMG_SIZE, IMG_SIZE))
+                training_data.append([new_array, class_num])
+            except Exception as e:
+                bad_file.append(file_)
+                pass
+
+create_training_data()
+print(bad_file)
+
+# print(training_data[3000][1])
+import random
+
+random.shuffle(training_data)
+
+for i in training_data[:10]:
+    print(i[1])
+
+X = []
+y = []
+
+for features, labels in training_data:
+    X.append(features)
+    y.append(labels)
+
+print(X[:1])
+
+X = np.array(X).reshape(-1, IMG_SIZE,IMG_SIZE, 1)
+
+
+import pickle 
+with open ("Week4/chest_x_ray/exported_models/X_test.pickle", "wb") as file_x:
+    pickle.dump(X, file_x)
+with open ("Week4/chest_x_ray/exported_models/y_test.pickle", "wb") as file_y:
+    pickle.dump(y, file_y)
+
+
