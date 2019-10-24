@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Prediction Outcome</title>
+    </head>
+    <body>
+        <p>Yay...{{image_name}} has been successfully uploaded!</p>
+        <p>The destination is {{dest}}</p>
+        <!-- <img src="{{ url_for('homepage', filename=image_name)}}"> -->
+        <img src="{{ url_for('static', filename=img_name) }}" width="500" height="250">
+        <p>The prediction score for this scan is <b>{{score_array}}</b></p>
+
+    </body>
+</html>
