@@ -16,4 +16,4 @@ matplotlib==2.2.2
 seaborn==0.8.1
 scikit-learn==0.20.1
 mlxtend==0.14.0
-opencv-python==4.1.1.26 
+opencv-python==4.2.0.32 
