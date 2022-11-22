@@ -10,7 +10,7 @@ tqdm==4.28.1
 Keras==2.3.1
 Keras-preprocessing==v1.0.5
 tensorflow==2.0.0 
-Pillow==5.1.0
+Pillow==9.3.0
 opencv-python==3.4.4.19
 matplotlib==2.2.2
 seaborn==0.8.1
